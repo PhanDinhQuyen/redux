@@ -9,10 +9,13 @@ const filtersSlice = createSlice({
   reducers: {
     searchFilterChange: (state, action) => {
       state.search = action.payload;
-      console.log(state.search);
     },
-    statusFilterChange: () => {},
-    prioritiesFilterChange: () => {},
+    statusFilterChange: (state, action) => {
+      state.status = action.payload;
+    },
+    prioritiesFilterChange: (state, action) => {
+      state.priorities = action.payload;
+    },
   },
 });
 export default filtersSlice;

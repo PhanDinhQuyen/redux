@@ -7,10 +7,18 @@ const { Search } = Input;
 
 export default function Filters() {
   const [searchTerm, setSearchTerm] = useState("");
+  const [status, setStatus] = useState("All");
   const dispatch = useDispatch();
   const handleChangeInput = (e) => {
     setSearchTerm(e.target.value);
     dispatch(filtersSlice.actions.searchFilterChange(e.target.value));
+  };
+  const handleChangeStatus = (e) => {
+    setStatus(e.target.value);
+    dispatch(filtersSlice.actions.statusFilterChange(e.target.value));
+  };
+  const handleChangePrioriries = (value) => {
+    dispatch(filtersSlice.actions.prioritiesFilterChange(value));
   };
   return (
     <Row justify='center'>
@@ -32,7 +40,7 @@ export default function Filters() {
         >
           Filter By Status
         </Typography.Paragraph>
-        <Radio.Group>
+        <Radio.Group value={status} onChange={handleChangeStatus}>
           <Radio value='All'>All</Radio>
           <Radio value='Completed'>Completed</Radio>
           <Radio value='Todo'>To do</Radio>
@@ -49,6 +57,7 @@ export default function Filters() {
           allowClear
           placeholder='Please select'
           style={{ width: "100%" }}
+          onChange={handleChangePrioriries}
         >
           <Select.Option value='High' label='High'>
             <Tag color='red'>High</Tag>
